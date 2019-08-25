@@ -1,0 +1,226 @@
+    1  apt-get update; apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common -y 
+    2  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    3  add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    4     $(lsb_release -cs) \
+    5     stable"
+    6  apt-get update 
+    7  apt-get install docker-ce docker-ce-cli containerd.io -y 
+    8  docker version 
+    9  ls
+   10  docker run ubuntu echo "Hello World"
+   11  docker run ubuntu echo "Hello World - 2"
+   12  docker images 
+   13  docker run centos echo "Hello World - 2"
+   14  docker images 
+   15  cat /etc/*-release\
+   16  cat /etc/*-release
+   17  docker run ubuntu cat /etc/*-release
+   18  docker run centos cat /etc/*-release
+   19  docker pull ubuntu:16.04
+   20  docker images 
+   21  docker ps 
+   22  docker ps -a
+   23  docker run -it ubuntu /bin/bash
+   24  docker ps 
+   25  docker run -it ubuntu /bin/bash
+   26  docker ps 
+   27  docker run -d ubuntu /bin/bash
+   28  docker ps 
+   29  docker run -itd ubuntu /bin/bash
+   30  docker ps 
+   31  docker run -itd ubuntu /bin/bash
+   32  docker ps 
+   33  ls
+   34  docker ps 
+   35  docker ps -q
+   36  docker ps -aq
+   37  docker kill $(docker ps -q)
+   38  docker ps 
+   39  docker ps -a
+   40  docker ps 
+   41  docker ps -a
+   42  docker start 7e0e6f151c67
+   43  docker ps 
+   44  docker rm $(docker ps -aq)
+   45  docker ps 
+   46  docker kill $(docker ps -aq)
+   47  docker rm $(docker ps -aq)
+   48  docker ps 
+   49  docker ps -a
+   50  history 
+   51  docker run -itd ubuntu --name ppe01 /bin/bash
+   52  docker run -itd  --name ppe02 ubuntu /bin/bash
+   53  docker run -itd  --name ppe03 ubuntu /bin/bash
+   54  docker run -itd  --name ppe04 ubuntu /bin/bash
+   55  docker run -itd  --name ercore01 ubuntu /bin/bash
+   56  docker run -itd  --name ercore02 ubuntu /bin/bash
+   57  docker run -itd  --name ercore03 ubuntu /bin/bash
+   58  docker run -itd  --name ercore04 ubuntu /bin/bash
+   59  docker run -itd  --name app-A-01 centos /bin/bash
+   60  docker run -itd  --name app-A-02 centos /bin/bash
+   61  docker ps 
+   62  docker ps | grep -i ppe
+   63  docker ps | grep -i ppe | awk -F" " '{print $1}'
+   64  docker kill $(docker ps | grep -i ppe | awk -F" " '{print $1}')
+   65  docker ps 
+   66  ls
+   67  docker kill $(docker ps -aq)
+   68  docker rm $(docker ps -aq)
+   69  ls
+   70  docker ps 
+   71  docker run -it --name apache ubuntu /bin/bash
+   72  docker ps 
+   73  docker inspect 9aa1c0ec889f        
+   74  curl 172.17.0.2\
+   75  curl 172.17.0.2
+   76  curl 172.17.0.2/info.html
+   77  docker ps 
+   78  docker attach 9aa1c0ec889f        
+   79  docker ps 
+   80  docker commit -p -m "My Apache" 9aa1c0ec889f   myapache:v1
+   81  docker images 
+   82  docker run -it --name apache-02 myapache:v1 /bin/bash
+   83  curl 172.17.0.3.
+   84  curl 172.17.0.3/info.html
+   85  docker run -itd --name apache-03 myapache:v1 /bin/bash
+   86  docker run -itd --name apache-04 myapache:v1 /bin/bash
+   87  docker ps 
+   88  docker inspect apache-04
+   89  curl 172.17.0.5
+   90  curl 172.17.0.5/info.htm;
+   91  curl 172.17.0.5/info.html
+   92  curl 172.17.0.4/info.html
+   93  docker run -it --name apache-05 myapache:v1 /bin/bash
+   94  docker ps 
+   95  docker commit -p -m "My Apache" apache-05   myapache:v2
+   96  docker run -itd --name apache-06-v2 myapache:v2 /bin/bash
+   97  docker inspect apache-06-v2
+   98  curl 172.17.0.7
+   99  curl 172.17.0.7/info.html
+  100  ls
+  101  mkdir docker-build/apache -p
+  102  ls
+  103  cd docker-build/
+  104  ls
+  105  cd apache/
+  106  ls
+  107  vim Dockerfile 
+  108  ls
+  109  docker build -t myapache-dockerfile:v1 . 
+  110  docker run -d --name xyz1 myapache-dockerfile:v1
+  111  docker inspect xyz1 
+  112  curl 172.17.0.8
+  113  curl 172.17.0.8/myapp.html
+  114  docker inspect xyz1 
+  115  ls
+  116  ip addr 
+  117  ls
+  118  docker kill $(docker ps -aq)
+  119  docker rm $(docker ps -aq)
+  120  ip addr 
+  121  docker images 
+  122  docker run -d myapache-dockerfile:v1
+  123  docker ps 
+  124  ip addr 
+  125  docker run -d myapache-dockerfile:v1
+  126  ip addr 
+  127  ls
+  128  cd 
+  129  ls
+  130  cd /var/run/docker/netns/
+  131  ls
+  132  ip netns 
+  133  ln -s /var/run/docker/netns /var/run/netns
+  134  ip netns 
+  135  docker ps 
+  136  i af988b8f6e0a 
+  137  ip link
+  138  ip netns 
+  139  ip -n f804f4ba8a1b  link
+  140  ip addr 
+  141  ip link
+  142  ip netns 
+  143  ip -n f804f4ba8a1b  link
+  144  ip -n f804f4ba8a1b  addr
+  145  iptables -L
+  146  docker run -d -P myapache-dockerfile:v1
+  147  docker ps 
+  148  docker run -d -p 38080:80 myapache-dockerfile:v1
+  149  docker ps 
+  150  curl localhost:38080
+  151  curl localhost:38080/myapp.html
+  152  docker run -d -p 30080:80 myapache-dockerfile:v1
+  153  ip addr 
+  154  iptables -L
+  155  ls
+  156  cd 
+  157  ls
+  158  cd docker-build/
+  159  ls
+  160  cd apache/
+  161  ls
+  162  vim Dockerfile 
+  163  docker build -t myapache-dockerfile:v2 . 
+  164  docker run -d -P myapache-dockerfile:v2
+  165  docker ps 
+  166  ls
+  167  vim index.html
+  168  ls
+  169  vim Dockerfile 
+  170  ls
+  171  docker build -t myapache-dockerfile:v2 -f Dockerfile /tmp/
+  172  ls
+  173  pwd
+  174  docker build -t myapache-dockerfile:v2 -f Dockerfile /tmp/
+  175  ls
+  176  mv Dockerfile /tmp/
+  177  docker build -t myapache-dockerfile:v2 -f /tmp/Dockerfile .
+  178  docker run -d -P myapache-dockerfile:v3
+  179  docker images
+  180  docker run -d -P myapache-dockerfile:v2
+  181  docker ps 
+  182  ls
+  183  curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  184  chmod +x /usr/local/bin/docker-compose
+  185  docker-compose version 
+  186  ls
+  187  cd docker-build/
+  188  ls
+  189  mkdir docker-compose
+  190  ls
+  191  cp -rf apache docker-compose/
+  192  ls
+  193  cd docker-compose/
+  194  ls
+  195  cd apache/
+  196  ls
+  197  history 
+  198  ls
+  199  vim docker-compose.yaml
+  200  docker ps 
+  201  ls
+  202  cat index.html 
+  203  vim index.html 
+  204  ls
+  205  vim Dockerfile
+  206  docker-compose up -d build
+  207  ls
+  208  docker-compose up -d --build
+  209  docker ps 
+  210  ls
+  211  cat index.html 
+  212  vim index.html 
+  213  ls
+  214  docker-compose up -d --build
+  215  ls
+  216  cd ..
+  217  ls
+  218  cd 
+  219  ls
+  220  git clone https://github.com/amitvashist7/jenkins-devops-20190825.git
+  221  ls
+  222  mv docker-build jenkins-devops-20190825/
+  223  ls
+  224  cd jenkins-devops-20190825/
+  225  ls
+  226  history > History.txt
