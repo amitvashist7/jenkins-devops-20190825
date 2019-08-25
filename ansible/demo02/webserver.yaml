@@ -1,0 +1,29 @@
+---
+
+- hosts: web:db
+  sudo: yes
+
+  tasks:
+  - name: Install Apache Packages
+    apt: name=apache2 state=present
+
+  - name: Start Apache Service
+    service: name=apache2 state=started
+
+  - name: Deploy Index Page
+    copy: src=templates/index.html dest=/var/www/html/index.html
+
+  - name: Deploy Info Page
+    template: src=templates/info.j2 dest=/var/www/html/info.html
+
+
+
+- hosts: db
+  sudo: yes
+
+  tasks:
+  - name: Install NTP Packages
+    apt: name=ntp state=present
+
+  - name: Get the OS Info
+    shell: cat /etc/*-release > /tmp/osversion.txt 
